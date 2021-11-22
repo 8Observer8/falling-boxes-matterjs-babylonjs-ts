@@ -22,10 +22,7 @@ export default class Scene3D
         this._scene = this.createScene(canvas);
 
         window.onresize = () => this._engine.resize();
-
-        this.createWallsAndFloor();
         this.createPhysicsSimulation();
-
         this.doRender();
     }
 
@@ -67,14 +64,6 @@ export default class Scene3D
         skybox.material = skyboxMaterial;
 
         return scene;
-    }
-
-    private createWallsAndFloor(): void
-    {
-        const staticSphereBody = Matter.Bodies.circle(200, 50, 50, { isStatic: true });
-        const staticBoxBody = Matter.Bodies.rectangle(-200, 50, 100, 100, { isStatic: true });
-        const ground = Matter.Bodies.rectangle(0, -50, 500, 100, { isStatic: true });
-        Matter.World.add(this._matterEngine.world, [ground, staticSphereBody, staticBoxBody]);
     }
 
     private doRender(): void
